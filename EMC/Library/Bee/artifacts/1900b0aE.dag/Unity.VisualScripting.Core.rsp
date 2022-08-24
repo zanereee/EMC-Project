@@ -114,12 +114,14 @@
 -define:ENABLE_TERRAIN
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
--define:ENABLE_LEGACY_INPUT_MANAGER
+-define:ENABLE_INPUT_SYSTEM
+-define:PACKAGE_INPUT_SYSTEM_EXISTS
 -define:MODULE_ANIMATION_EXISTS
 -define:MODULE_PHYSICS_EXISTS
 -define:MODULE_PHYSICS_2D_EXISTS
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"D:/shit i need/Unity Projects/EMC-Project/EMC/Library/PackageCache/com.unity.cinemachine@2.8.6/Runtime/ThirdParty/clipper_library.dll"
 -r:"D:/shit i need/Unity Projects/EMC-Project/EMC/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/log4netPlastic.dll"
 -r:"D:/shit i need/Unity Projects/EMC-Project/EMC/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll"
 -r:"D:/shit i need/Unity Projects/EMC-Project/EMC/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
@@ -335,6 +337,7 @@
 -r:"D:/shit i need/Unity/Hub/Editor/2021.3.3f1/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll"
 -r:"D:/shit i need/Unity/Hub/Editor/2021.3.3f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll"
 -r:"D:/shit i need/Unity/Hub/Editor/2021.3.3f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Library/PackageCache/com.unity.visualscripting@1.7.6/Runtime/VisualScripting.Core/Cloning/Cloner.cs"
