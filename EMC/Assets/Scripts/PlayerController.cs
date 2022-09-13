@@ -11,17 +11,22 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Camera playerCamera;
 
     private PlayerControls playerControls;
+	private InputAction jump;
 	private InputAction movement;
 
-    [SerializeField] private float movementDir = 1f;
+	[SerializeField] private float jumpPower = 2f;
+	[SerializeField] private float movementDir = 1f;
     [SerializeField] private float moveSpeed = 5f;
-    private Vector3 direction = Vector3.zero;
+	private Vector3 direction = Vector3.zero;
+
+	private bool isGrounded;
 
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 		playerControls = new PlayerControls();
+		isGrounded = true;
 	}
 
 	private void Update()
@@ -35,22 +40,26 @@ public class PlayerController : MonoBehaviour
 		{
 			animator.SetBool("isBored", true);
 		}
+
 	}
 
 	private void FixedUpdate()
 	{
-		direction += movement.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementDir;
-		direction += movement.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementDir;
+		direction += movement.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementDir; // X - Axis
+		direction += movement.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementDir; // Z - Axis
 
-		rb.AddForce(direction, ForceMode.Impulse);
-		direction = Vector3.zero;
+		if (isGrounded)
+		{ 
+			rb.AddForce(direction, ForceMode.Impulse);
+			direction = Vector3.zero;
 
-		Vector3 hVelocity = rb.velocity;
-		hVelocity.y = 0;
-		if (hVelocity.sqrMagnitude > moveSpeed * moveSpeed)
-			rb.velocity = hVelocity.normalized * moveSpeed + Vector3.up * rb.velocity.y;
+			Vector3 horizontalVelocity = rb.velocity;
+			horizontalVelocity.y = 0;
+			if (horizontalVelocity.sqrMagnitude > moveSpeed * moveSpeed)
+				rb.velocity = horizontalVelocity.normalized * moveSpeed + Vector3.up * rb.velocity.y;
 
-		LookAt();
+			LookAt();
+		}
 	}
 
 	private void LookAt()
@@ -71,6 +80,7 @@ public class PlayerController : MonoBehaviour
 	private void OnEnable()
 	{
 		movement = playerControls.Player.Move;
+		jump = playerControls.Player.Jump;
 		playerControls.Player.Enable();
 	}
 
@@ -79,7 +89,7 @@ public class PlayerController : MonoBehaviour
         playerControls.Player.Disable();
 	}
 
-	
+	// Z - AXIS
 	private Vector3 GetCameraForward(Camera playerCamera)
 	{
 		Vector3 forward = playerCamera.transform.forward;
@@ -87,6 +97,7 @@ public class PlayerController : MonoBehaviour
 		return forward.normalized;
 	}
 
+	// X - AXIS
 	private Vector3 GetCameraRight(Camera playerCamera)
 	{
 		Vector3 right = playerCamera.transform.right;
